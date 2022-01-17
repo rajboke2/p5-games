@@ -43,7 +43,13 @@ function trackObjects(){
         if(gunObj.bulletArray[i].bY<=objectY){
           movingObj.randomObjectsArray[j].burst=5;
           bulletHitted.push(i);
-          score+=10;
+		  if(movingObj.randomObjectsArray[j].balloonW > 70){
+			score+=20;
+		  }else if(movingObj.randomObjectsArray[j].balloonH > 80){
+			score+=20;
+		  }else{
+			score+=10;  
+		  }
         }
       }
     }
@@ -54,19 +60,17 @@ function trackObjects(){
   // Remove bullets which are missed
   for(let i1=0;i1<gunObj.bulletArray.length;i1++){
     if(gunObj.bulletArray[i1].bY < 0){
-      gunObj.bulletArray.shift()
+      gunObj.bulletArray.splice(i1,1);
     }
   }
-  // End game when balloon reaches till gun
+  // End game when balloon reaches to gun
   let objY = '';
   for(let j1=0;j1<movingObj.randomObjectsArray.length;j1++){
     if (movingObj.randomObjectsArray[j1].type === 'balloon'){
       objY = movingObj.randomObjectsArray[j1].balloonY
     }
     if(objY >= canvasH-30){
-      gunObj.bulletArray=[]
       gameEnd=1;
-      DownMovingObjects.objectStep=0;
     }
   }
 }
@@ -78,15 +82,17 @@ function displayScore() {
   noStroke();
   text("Score: "+score,10,30);
   if(gameEnd === 1){
-    textSize(30);
-    fill('black');
-    noStroke();
-    text("Game End",canvasW/2-60, canvasH/2);
+	gunObj.bulletArray=[]
+	DownMovingObjects.objectStep=0;
+	textSize(30);
+	fill('black');
+	noStroke();
+	text("Game End",canvasW/2-60, canvasH/2);
   }
 }
 
 function keyPressed() {
-  if (keyCode === UP_ARROW & gameEnd==0) {
+  if (keyCode === UP_ARROW) {
     gunObj.shoot();
   }
 }
@@ -94,16 +100,17 @@ function keyPressed() {
 function setup() {
   cnv = createCanvas(canvasW, canvasH);
   cnv.position(windowWidth/2-canvasW/2,100);
-  gunObj = new Gun(gunX,gunY,gunW,gunH,'rect');
+  gunObj = new Gun(gunX,gunY,gunW,gunH);
   movingObj=new DownMovingObjects(canvasW, canvasH);
   for(let i=0;i<=2;i++){
-   movingObj.createRandomObject(); 
+   movingObj.createRandomObject();
   }
 }
 
 function draw() {
   background(135,206,235);
   gunObj.show();
+  gunObj.moveX(7);
   movingObj.show();
   trackObjects();
   displayScore();

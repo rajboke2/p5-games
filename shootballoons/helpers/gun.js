@@ -1,28 +1,17 @@
 class Gun{
-  constructor(x,y,w,h,bulletShape){
+  constructor(x,y,w,h){
     this.gX=x;
     this.gY=y;
     this.gW=w;
     this.gH=h;
-    this.bD=10;
-    this.bulletShape=bulletShape;
     this.bulletArray=[];
   }
-  // static gunSound = loadSound('./gunshotsound.mp3');
-  show(){
-    // if (song.isPlaying()) {
-    //   // .isPlaying() returns a boolean
-    //   song.stop();
-    //   background(255, 0, 0);
-    // } else {
-    //   song.play();
-    //   background(0, 255, 0);
-    // }
-    if (keyIsPressed === true) {
+  moveX(val){
+	if (keyIsPressed === true) {
       if (keyCode === LEFT_ARROW) {
-      this.gX-=5
+      this.gX-=val
       }else if (keyCode === RIGHT_ARROW) {
-        this.gX+=5
+        this.gX+=val
       }
       if(this.gX<=0){
         this.gX=0
@@ -30,6 +19,8 @@ class Gun{
         this.gX=canvasW-this.gW
       }
     }
+  }
+  show(){
     //Gun
     // fill('black');
     let x1=this.gX;
@@ -51,30 +42,18 @@ class Gun{
     for(let i=0;i<this.bulletArray.length;i++){
       fill('red');
       noStroke();
-      if(this.bulletShape === 'circle'){
-        circle(this.bulletArray[i].bX, this.bulletArray[i].bY, this.bD)
-      }else if(this.bulletShape === 'rect'){
-        rect(this.bulletArray[i].bX, this.bulletArray[i].bY, this.bulletArray[i].bW, this.bulletArray[i].bH)
-      }
+      rect(this.bulletArray[i].bX, this.bulletArray[i].bY, this.bulletArray[i].bW, this.bulletArray[i].bH)
       this.bulletArray[i].bY += bstep;
     }
   }
   shoot(){
-    if(this.bulletShape === 'circle'){
-      this.bullet={
-                  bX: this.gX+(this.gW/2),
-                  bY: this.gY
-                }
-    }else if(this.bulletShape === 'rect'){
-      this.bullet={
+    this.bullet={
                   bX: this.gX+(this.gW/2)/2,
                   bY: this.gY,
                   bW: 1,
                   bH: 20
                 }
-    }
     this.bulletArray.push(this.bullet)
-    // Gun.gunSound.play();
     bstep = -10;
   }
 }
