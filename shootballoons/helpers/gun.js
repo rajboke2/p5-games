@@ -1,11 +1,12 @@
 class Gun{
-  constructor(x,y,w,h){
+  constructor(x,y){
     this.gX=x;
-    this.gY=y;
-    this.gW=w;
-    this.gH=h;
+    this.gW=5;
+    this.gH=40;
+    this.gY=y-this.gH;
     this.bulletArray=[];
   }
+
   moveX(val){
    if (keyIsPressed === true) {
     if (keyCode === LEFT_ARROW) {
@@ -22,22 +23,10 @@ class Gun{
 }
 show(){
     //Gun
-    // fill('black');
-    let x1=this.gX;
-    let y1=this.gY;
-    let w1=this.gW;
-    let h1=this.gH;
-    let w2=5;
-    let h2=40;
     stroke(100);
     fill(0,0,0);
-    rect(x1,y1,w1,h1);
-    stroke(100);
-    fill(0,0,0);
-    rect(x1+w1,y1+20,w2,h2);
-    stroke(100);
-    fill(0,0,0);
-    quad(x1,y1+h1,x1+w1+w2,y1+h1,x1+w1+10,y1+h1+25,x1,y1+h1+25);
+    rect(this.gX,this.gY,this.gW,this.gH);
+    rect(this.gX+this.gW,this.gY,this.gW,this.gH);
     // Bullets
     for(let i=0;i<this.bulletArray.length;i++){
       fill('red');
@@ -46,14 +35,16 @@ show(){
       this.bulletArray[i].bY += bstep;
     }
   }
-  shoot(){
-    this.bullet={
-      bX: this.gX+(this.gW/2)/2,
-      bY: this.gY,
+  shoot(n){
+    for(let i=0;i<n;i++){
+      this.bullet={
+      bX: this.gX+this.gW,
+      bY: this.gY+i*45,
       bW: 1,
-      bH: 20
+      bH: 10
+      }
+      this.bulletArray.push(this.bullet)
+      bstep = -10;
     }
-    this.bulletArray.push(this.bullet)
-    bstep = -10;
   }
 }

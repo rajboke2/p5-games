@@ -1,28 +1,31 @@
 //Canvas
-canvasW=500;
-canvasH=400;
+let canvasW=500;
+let canvasH=400;
 
 // Gun
-let gunX=200;
-let gunW=10;
-let gunH=40;
-let gunY=canvasH-60;
+let gunX=canvasW/2;
+let gunY=canvasH;
 
-// Bullet
 let bstep = 0;
-let gameEnd=0;
-let score=0;
+var gameEnd;
+var score;
 DownMovingObjects.objectStep = 1;
 
 function trackObjects(){
-  //Balloons bursting
+  //Remove balloons which are bursted
   for(let j=0;j<movingObj.randomObjectsArray.length;j++){
     if(movingObj.randomObjectsArray[j].liveStatus === 0){
       movingObj.randomObjectsArray.splice(j,1);
       movingObj.createRandomObject();
     }
   }
-  // Check if bullet hits the balloon
+  // Remove bullets which are missed
+  for(let i1=0;i1<gunObj.bulletArray.length;i1++){
+    if(gunObj.bulletArray[i1].bY < 0){
+      gunObj.bulletArray.splice(i1,1);
+    }
+  }
+  // Burst balloon if bullet hits the balloon
   bulletHitted = [];
   for(let i=0;i<gunObj.bulletArray.length;i++){
     for(let j=0;j<movingObj.randomObjectsArray.length;j++){
@@ -41,7 +44,7 @@ function trackObjects(){
       if(gunObj.bulletArray[i].bX >= objectMinWidth & 
        gunObj.bulletArray[i].bX <= objectMaxWidth){
         if(gunObj.bulletArray[i].bY<=objectY){
-          movingObj.randomObjectsArray[j].burst=5;
+          movingObj.randomObjectsArray[j].burst=10;
           bulletHitted.push(i);
           if(movingObj.randomObjectsArray[j].balloonW > 70){
            score+=20;
@@ -53,25 +56,19 @@ function trackObjects(){
        }
      }
    }
-  // Remove bullets which are hitted
-  for(let j1=0;j1<bulletHitted.length;j1++){
-    gunObj.bulletArray.splice(j1,1);
+ }
+// Remove bullets which hitted a balloon
+for(let j1=0;j1<bulletHitted.length;j1++){
+  gunObj.bulletArray.splice(j1,1);
+}
+// End game when balloon reaches to gun
+let objY = '';
+for(let j1=0;j1<movingObj.randomObjectsArray.length;j1++){
+  if (movingObj.randomObjectsArray[j1].type === 'balloon'){
+    objY = movingObj.randomObjectsArray[j1].balloonY
   }
-  // Remove bullets which are missed
-  for(let i1=0;i1<gunObj.bulletArray.length;i1++){
-    if(gunObj.bulletArray[i1].bY < 0){
-      gunObj.bulletArray.splice(i1,1);
-    }
-  }
-  // End game when balloon reaches to gun
-  let objY = '';
-  for(let j1=0;j1<movingObj.randomObjectsArray.length;j1++){
-    if (movingObj.randomObjectsArray[j1].type === 'balloon'){
-      objY = movingObj.randomObjectsArray[j1].balloonY
-    }
-    if(objY >= canvasH-30){
-      gameEnd=1;
-    }
+  if(objY >= canvasH-30){
+    gameEnd=1;
   }
 }
 }
@@ -82,7 +79,7 @@ function displayScore() {
   noStroke();
   text("Score: "+score,10,30);
   if(gameEnd === 1){
-   gunObj.bulletArray=[]
+   gunObj.bulletArray=[];
    DownMovingObjects.objectStep=0;
    textSize(30);
    fill('black');
@@ -93,25 +90,38 @@ function displayScore() {
 
 function keyPressed() {
   if (keyCode === UP_ARROW) {
-    gunObj.shoot();
+    gunObj.shoot(1);
   }
 }
 
+function mousePressed() {
+  setup();
+}
+
 function setup() {
+  gameEnd = 0;
+  score = 0;
+  DownMovingObjects.objectStep=1;
   cnv = createCanvas(canvasW, canvasH);
   cnv.position(windowWidth/2-canvasW/2,100);
-  gunObj = new Gun(gunX,gunY,gunW,gunH);
+  gunObj = new Gun(gunX,gunY);
   movingObj=new DownMovingObjects(canvasW, canvasH);
   for(let i=0;i<=2;i++){
    movingObj.createRandomObject();
+ }
+ Cloud.cloudArray = [];
+ for(let i=0;i<3;i++){
+   cloudObj = new Cloud(i*floor(random(130, 200)), 50, floor(random(55, 65)), floor(random(45, 55)));
+   Cloud.addToCloudArray(cloudObj);
  }
 }
 
 function draw() {
   background(135,206,235);
-  gunObj.show();
-  gunObj.moveX(7);
+  Cloud.showCloudArray();
   movingObj.show();
+  gunObj.moveX(7);
+  gunObj.show();
   trackObjects();
   displayScore();
 }
