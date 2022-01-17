@@ -7,7 +7,6 @@ class Cloud{
 		this.balloonColor = 'white';
 		this.xVal = 0;
 	}
-	
 	static cloudArray = [];
 	static addToCloudArray(cloud){
 		Cloud.cloudArray.push(cloud);

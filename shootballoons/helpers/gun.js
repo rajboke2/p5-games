@@ -6,7 +6,6 @@ class Gun{
     this.gY=y-this.gH;
     this.bulletArray=[];
   }
-
   moveX(val){
    if (keyIsPressed === true) {
     if (keyCode === LEFT_ARROW) {

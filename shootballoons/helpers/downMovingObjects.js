@@ -5,9 +5,7 @@ class DownMovingObjects{
     this.canvasW = canvasw;
     this.canvasH = canvash;
   }
-
   static objectStep = 1;
-
   createRandomObject(){
     let circleColorsArray=['pink', 'yellow', 'red',
                            'blue', 'orange', 'green',
