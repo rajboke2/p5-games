@@ -7,20 +7,20 @@ class Gun{
     this.bulletArray=[];
   }
   moveX(val){
-	if (keyIsPressed === true) {
-      if (keyCode === LEFT_ARROW) {
+   if (keyIsPressed === true) {
+    if (keyCode === LEFT_ARROW) {
       this.gX-=val
-      }else if (keyCode === RIGHT_ARROW) {
-        this.gX+=val
-      }
-      if(this.gX<=0){
-        this.gX=0
-      }else if(this.gX+this.gW>=canvasW){
-        this.gX=canvasW-this.gW
-      }
+    }else if (keyCode === RIGHT_ARROW) {
+      this.gX+=val
+    }
+    if(this.gX<=0){
+      this.gX=0
+    }else if(this.gX+this.gW>=canvasW){
+      this.gX=canvasW-this.gW
     }
   }
-  show(){
+}
+show(){
     //Gun
     // fill('black');
     let x1=this.gX;
@@ -48,11 +48,11 @@ class Gun{
   }
   shoot(){
     this.bullet={
-                  bX: this.gX+(this.gW/2)/2,
-                  bY: this.gY,
-                  bW: 1,
-                  bH: 20
-                }
+      bX: this.gX+(this.gW/2)/2,
+      bY: this.gY,
+      bW: 1,
+      bH: 20
+    }
     this.bulletArray.push(this.bullet)
     bstep = -10;
   }

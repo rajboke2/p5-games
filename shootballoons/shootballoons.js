@@ -31,31 +31,31 @@ function trackObjects(){
       let objectMinWidth=0;
       let objectMaxWidth=0;
       if(movingObj.randomObjectsArray[j].type==='balloon'){
-          objectX=movingObj.randomObjectsArray[j].balloonX
-          objectY=movingObj.randomObjectsArray[j].balloonY
-          objectMinWidth=objectX-
-            movingObj.randomObjectsArray[j].balloonW;
-          objectMaxWidth=objectX+
-            movingObj.randomObjectsArray[j].balloonW;
+        objectX=movingObj.randomObjectsArray[j].balloonX
+        objectY=movingObj.randomObjectsArray[j].balloonY
+        objectMinWidth=objectX-
+        movingObj.randomObjectsArray[j].balloonW;
+        objectMaxWidth=objectX+
+        movingObj.randomObjectsArray[j].balloonW;
       }
       if(gunObj.bulletArray[i].bX >= objectMinWidth & 
-         gunObj.bulletArray[i].bX <= objectMaxWidth){
+       gunObj.bulletArray[i].bX <= objectMaxWidth){
         if(gunObj.bulletArray[i].bY<=objectY){
           movingObj.randomObjectsArray[j].burst=5;
           bulletHitted.push(i);
-		  if(movingObj.randomObjectsArray[j].balloonW > 70){
-			score+=20;
-		  }else if(movingObj.randomObjectsArray[j].balloonH > 80){
-			score+=20;
-		  }else{
-			score+=10;  
-		  }
-        }
-      }
-    }
+          if(movingObj.randomObjectsArray[j].balloonW > 70){
+           score+=20;
+         }else if(movingObj.randomObjectsArray[j].balloonH > 80){
+           score+=20;
+         }else{
+           score+=10;  
+         }
+       }
+     }
+   }
   // Remove bullets which are hitted
   for(let j1=0;j1<bulletHitted.length;j1++){
-      gunObj.bulletArray.splice(j1,1);
+    gunObj.bulletArray.splice(j1,1);
   }
   // Remove bullets which are missed
   for(let i1=0;i1<gunObj.bulletArray.length;i1++){
@@ -82,13 +82,13 @@ function displayScore() {
   noStroke();
   text("Score: "+score,10,30);
   if(gameEnd === 1){
-	gunObj.bulletArray=[]
-	DownMovingObjects.objectStep=0;
-	textSize(30);
-	fill('black');
-	noStroke();
-	text("Game End",canvasW/2-60, canvasH/2);
-  }
+   gunObj.bulletArray=[]
+   DownMovingObjects.objectStep=0;
+   textSize(30);
+   fill('black');
+   noStroke();
+   text("Game End",canvasW/2-60, canvasH/2);
+ }
 }
 
 function keyPressed() {
@@ -104,7 +104,7 @@ function setup() {
   movingObj=new DownMovingObjects(canvasW, canvasH);
   for(let i=0;i<=2;i++){
    movingObj.createRandomObject();
-  }
+ }
 }
 
 function draw() {

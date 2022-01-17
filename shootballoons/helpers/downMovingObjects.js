@@ -8,16 +8,16 @@ class DownMovingObjects{
   static objectStep = 1;
   createRandomObject(){
     let circleColorsArray=['pink','yellow','red',
-                            'blue','orange','green',
-                            'black'
-                            ]
+    'blue','orange','green',
+    'black'
+    ]
     let objectDetails='';
     if(random(this.objectsArrary) === 'balloon'){
-		let x = floor(random(10, canvasW-10));
-		let w = floor(random(60, 80));
-		let h = floor(random(70, 90));
-        objectDetails = new Balloon(x,0,w,h,random(circleColorsArray));
-      }
+      let x = floor(random(10, canvasW-10));
+      let w = floor(random(60, 80));
+      let h = floor(random(70, 90));
+      objectDetails = new Balloon(x,0,w,h,random(circleColorsArray));
+    }
     this.randomObjectsArray.push(objectDetails)
   }
   show(){
