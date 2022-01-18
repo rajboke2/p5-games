@@ -1,5 +1,5 @@
 //Canvas
-let canvasW=500;
+let canvasW=600;
 let canvasH=400;
 
 // Gun
@@ -37,11 +37,11 @@ function trackObjects(){
         objectX=movingObj.randomObjectsArray[j].balloonX
         objectY=movingObj.randomObjectsArray[j].balloonY
         objectMinWidth=objectX-
-        movingObj.randomObjectsArray[j].balloonW;
+        movingObj.randomObjectsArray[j].balloonW+10;
         objectMaxWidth=objectX+
-        movingObj.randomObjectsArray[j].balloonW;
+        movingObj.randomObjectsArray[j].balloonW-10;
       }
-      if(gunObj.bulletArray[i].bX >= objectMinWidth & 
+      if(gunObj.bulletArray[i].bX >= objectMinWidth && 
        gunObj.bulletArray[i].bX <= objectMaxWidth){
         if(gunObj.bulletArray[i].bY<=objectY){
           movingObj.randomObjectsArray[j].burst=10;
@@ -110,7 +110,7 @@ function setup() {
    movingObj.createRandomObject();
  }
  Cloud.cloudArray = [];
- for(let i=0;i<3;i++){
+ for(let i=0;i<4;i++){
    cloudObj = new Cloud(i*floor(random(130, 200)), 50, floor(random(55, 65)), floor(random(45, 55)));
    Cloud.addToCloudArray(cloudObj);
  }

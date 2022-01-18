@@ -1,9 +1,9 @@
 class DownMovingObjects{
-  constructor(canvasw, canvash){
+  constructor(canvasW, canvasH){
     this.objectsArrary=['balloon'];
     this.randomObjectsArray=[];
-    this.canvasW = canvasw;
-    this.canvasH = canvash;
+    this.canvasW = canvasW;
+    this.canvasH = canvasH;
   }
   static objectStep = 1;
   createRandomObject(){
