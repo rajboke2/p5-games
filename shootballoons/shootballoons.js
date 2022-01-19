@@ -13,9 +13,9 @@ DownMovingObjects.objectStep = 1;
 
 function trackObjects(){
   //Remove balloons which are bursted
-  for(let j=0;j<movingObj.randomObjectsArray.length;j++){
-    if(movingObj.randomObjectsArray[j].liveStatus === 0){
-      movingObj.randomObjectsArray.splice(j,1);
+  for(let i=0;i<movingObj.randomObjectsArray.length;i++){
+    if(movingObj.randomObjectsArray[i].liveStatus === 0){
+      movingObj.randomObjectsArray.splice(i,1);
       movingObj.createRandomObject();
     }
   }
