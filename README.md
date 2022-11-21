@@ -1,5 +1,6 @@
-# p5-games
-Games using p5.js
+# Shoot Balloons
+
+### Install steps:
 
 1. Clone the repository
     ```sh
@@ -12,10 +13,11 @@ Games using p5.js
     $ cd p5-games/shootballoons/
     ```
 3. Open the index.html file in any browser.
-4. Game controls:
+
+### Game controls:
     
-    UP arrow key - To shoot ballons
+    1. UP arrow key - To shoot ballons
     
-    Left arrow key - To move gun left
+    2. Left arrow key - To move gun left
     
-    Left arrow key - To move gun right
+    3. Left arrow key - To move gun right
