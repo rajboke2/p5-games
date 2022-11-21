@@ -1,18 +1,20 @@
 # Shoot Balloons
 
-### Install steps:
+### Installation:
 
-1. Clone the repository
-    ```sh
+  Clone the repository
+  
     $ git clone https://github.com/rajboke2/p5-games.git
-    ```
-2. Go inside the directory for particular game.
+    
+### To start the game:
+
+1. Go inside the directory for particular game.
 
     E.g:
     ```sh
     $ cd p5-games/shootballoons/
     ```
-3. Open the index.html file in any browser.
+2. Open the index.html file in browser.
 
 ### Game controls:
     
