@@ -4,7 +4,7 @@
 
   Clone the repository
   
-    $ git clone https://github.com/rajboke2/p5-games.git
+    git clone https://github.com/rajboke2/p5-games.git
     
 ### To start the game:
 
