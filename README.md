@@ -12,3 +12,10 @@ Games using p5.js
     $ cd p5-games/shootballoons/
     ```
 3. Open the index.html file in any browser.
+4. Game controls:
+    
+    UP arrow key - To shoot ballons
+    
+    Left arrow key - To move gun left
+    
+    Left arrow key - To move gun right
