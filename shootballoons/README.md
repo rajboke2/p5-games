@@ -17,6 +17,6 @@
 
 ### Game controls:
 
-1. **UP** arrow key - To shoot ballons
+1. **UP** arrow key - To shoot balloons
 2. **Left** arrow key - To move gun left
 3. **Right** arrow key - To move gun right
